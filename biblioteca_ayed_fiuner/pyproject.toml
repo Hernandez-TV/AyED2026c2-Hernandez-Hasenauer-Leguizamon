@@ -1,0 +1,22 @@
+[build-system]
+requires = ["hatchling >= 1.26"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["ayedfiuner"]
+
+[project]
+name = "ayedfiuner"
+version = "0.0.1"
+authors = [
+  { name="Estudiantes de AyED-FI-UNER", email="lica@ingenieria.uner.edu.ar" },
+]
+description = "Biblioteca de Estudiantes para AyED-FI-UNER"
+readme = "README.md"
+requires-python = ">=3.13"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+license = "MIT"
+license-files = ["LICEN[CS]E*"]
