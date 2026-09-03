@@ -45,6 +45,20 @@ class ListaDobleEnlazada:
     @property
     def cabeza(self):
         return self._cabeza
+
+    @cabeza.setter
+    def cabeza(self, nuevo_cabeza):
+        self._cabeza = nuevo_cabeza
+
+    @property
+    def cola(self):
+        return self._cola
+    @cola.setter
+    def cola(self, nuevo_cola):
+        self._cola = nuevo_cola
+    @property
+    def tamanio(self):
+        return self._tamanio
     
     def esta_vacia(self):
         return self.cabeza is None
