@@ -1,4 +1,4 @@
-from Estructuras_lineales.cola_circular_LDE import ColaCircular
+from modules.cola_circular import ColaCircular
 
 class Proceso:
 
@@ -36,8 +36,10 @@ def round_robin(procesos, quantum, tamanio_cola):
         Instrucción: Saca el primer proceso que esté esperando en la cola circular 
         para asignarle la CPU.
         """
+        
         # TODO: Desencolar el proceso
-        proceso = None # Reemplazar esta línea
+        proceso = cola.desencolar() # Reemplazar esta línea
+
 
         """
         PASO 2: Determinar el tiempo de ejecución real
@@ -47,8 +49,14 @@ def round_robin(procesos, quantum, tamanio_cola):
         liberará la CPU anticipadamente. 
         Calcula cuánto tiempo exacto va a ejecutar en este ciclo.
         """
+        """Comentario a grupo:condicion si es menor al quantum, se ejecuta el tiempo restante
+        si es mayor o igual al quantum, se ejecuta el quantum"""
+        if proceso.restante < quantum: 
+            ejecucion = proceso.restante 
+        else: 
+            ejecucion = quantum
         # TODO: Calcular la variable 'ejecucion'
-        ejecucion = 0 # Reemplazar esta línea
+        #ejecucion = 0 # Reemplazar esta línea
 
         """
         PASO 3: Simular la ejecución en la CPU
@@ -57,7 +65,9 @@ def round_robin(procesos, quantum, tamanio_cola):
         la variable global 'tiempo' sumándole ese mismo valor.
         """
         # TODO: Actualizar 'proceso.restante' y 'tiempo'
-        
+        proceso.restante -= ejecucion
+        tiempo += ejecucion
+
 
         """
         PASO 4: Encolar procesos recién llegados ("Preemption")
@@ -69,7 +79,9 @@ def round_robin(procesos, quantum, tamanio_cola):
         de procesos y si el tiempo de 'llegada' de ese proceso es menor o igual al 'tiempo' actual.
         """
         # TODO: Encolar los procesos que hayan llegado mientras la CPU estaba ocupada
-        
+        while indice < len(procesos) and procesos[indice].llegada <= tiempo:
+            cola.encolar(procesos[indice])
+            indice += 1
 
         """
         PASO 5: Verificación de finalización o reencolado
