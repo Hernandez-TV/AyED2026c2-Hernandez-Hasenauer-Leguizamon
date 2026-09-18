@@ -1,6 +1,6 @@
-class ColaCircular:
+class ColaCircular: #se recomienda hacer con una cola doble enlazada, pero si pasa el test se puede dejar asi
     def __init__(self, capacidad):
-        self.capacidad = capacidad
+        self.capacidad = capacidad #define tamanio de la cola
         self.cola = [None] * capacidad
         self.frente = 0
         self.final = 0
