@@ -36,11 +36,7 @@ def round_robin(procesos, quantum, tamanio_cola):
         Instrucción: Saca el primer proceso que esté esperando en la cola circular 
         para asignarle la CPU.
         """
-        
-        # TODO: Desencolar el proceso
-        proceso = cola.desencolar() # Reemplazar esta línea
-
-
+        proceso = cola.desencolar() 
         """
         PASO 2: Determinar el tiempo de ejecución real
         Instrucción: El proceso ejecutará un máximo igual al 'quantum'. 
@@ -55,8 +51,6 @@ def round_robin(procesos, quantum, tamanio_cola):
             ejecucion = proceso.restante 
         else: 
             ejecucion = quantum
-        # TODO: Calcular la variable 'ejecucion'
-        #ejecucion = 0 # Reemplazar esta línea
 
         """
         PASO 3: Simular la ejecución en la CPU
@@ -64,7 +58,7 @@ def round_robin(procesos, quantum, tamanio_cola):
         tiempo de ejecución calculado en el paso anterior. Luego, actualiza 
         la variable global 'tiempo' sumándole ese mismo valor.
         """
-        # TODO: Actualizar 'proceso.restante' y 'tiempo'
+        #Actualizamos el tiempo restante del proceso y el reloj global del sistema 
         proceso.restante -= ejecucion
         tiempo += ejecucion
 
@@ -78,7 +72,6 @@ def round_robin(procesos, quantum, tamanio_cola):
         Ayuda: Usa un ciclo while comprobando si 'indice' es menor a la cantidad total 
         de procesos y si el tiempo de 'llegada' de ese proceso es menor o igual al 'tiempo' actual.
         """
-        # TODO: Encolar los procesos que hayan llegado mientras la CPU estaba ocupada
         while indice < len(procesos) and procesos[indice].llegada <= tiempo:
             cola.encolar(procesos[indice])
             indice += 1
@@ -90,8 +83,12 @@ def round_robin(procesos, quantum, tamanio_cola):
         - Si NO terminó: El proceso es "preempted" y debe volver al final de la cola circular 
           para continuar más adelante.
         """
-        # TODO: Comprobar estado final del proceso y actuar en consecuencia
-        
+        # Si el proceso terminó, guardamos el instante en el que finalizó su ejecución
+        if proceso.restante == 0:
+            proceso.finalizacion = tiempo
+        #Si todavía le queda tiempo de CPU, vuelve al final de la cola (Round Robin)
+        else:
+            cola.encolar(proceso)
 
 if __name__ == "__main__":
 
@@ -113,9 +110,16 @@ if __name__ == "__main__":
         - Turnaround = tiempo de finalización - tiempo de llegada.
         - Waiting = Turnaround - duración (burst time).
         """
-        # TODO: Calcular 'turnaround' y 'waiting'
-        turnaround = 0 # Reemplazar esta línea
-        waiting = 0 # Reemplazar esta línea
+        ## Turnaround = Finalizacion - Llegada
+        turnaround = (
+            proceso.finalizacion
+            - proceso.llegada
+        )
+        ## Waiting = Turnaround - Burst
+        waiting = (
+            turnaround
+            - proceso.burst
+        )
 
         print(
             proceso.pid,
@@ -141,10 +145,14 @@ if __name__ == "__main__":
     print("ProcessID\tArrivalTime\tBurstTime\tTurnaround Time\tWaitingTime")
 
     for proceso in procesos_2:
-        # TODO: Aplicar los mismos cálculos de turnaround y waiting
-        turnaround = 0 # Reemplazar esta línea
-        waiting = 0 # Reemplazar esta línea
-
+        turnaround = (
+            proceso.finalizacion
+            - proceso.llegada
+        )
+        waiting = (
+            turnaround
+            - proceso.burst
+        )
         print(
             proceso.pid,
             proceso.llegada,
