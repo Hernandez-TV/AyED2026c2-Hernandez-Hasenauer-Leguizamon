@@ -1,15 +1,15 @@
-def bubble_sort(list):
+def bubble_sort(lista):
     """PRE:
     lista debe contener elementos comparables.
     POST:
     devuelve la lista ordenada de menor a mayor.
     """
-    n = len(list)
+    n = len(lista)
     for i in range(n):
         for j in range(0, n - i - 1):
-            if list[j] > list[j + 1]:
-                list[j], list[j + 1] = (
-                list[j + 1],
-                list[j]
+            if lista[j] > lista[j + 1]:
+                lista[j], lista[j + 1] = (
+                lista[j + 1],
+                lista[j]
                 )
-    return list
+    return lista
