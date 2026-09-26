@@ -1,0 +1,7 @@
+from modules.radix_sort import radix_sort
+datos = [329, 457, 657, 839, 436, 720, 355]
+print("Radix Sort")
+print("Original:")
+print(datos)
+print("Ordenada:")
+print(radix_sort(datos))

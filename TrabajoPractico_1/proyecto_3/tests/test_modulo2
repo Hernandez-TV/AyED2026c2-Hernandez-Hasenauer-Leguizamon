@@ -1,0 +1,7 @@
+from modules.quick_sort import quick_sort
+datos = [8, 3, 5, 1, 9]
+print("QuickSort")
+print("Original:")
+print(datos)
+print("Ordenada:")
+print(quick_sort(datos))
