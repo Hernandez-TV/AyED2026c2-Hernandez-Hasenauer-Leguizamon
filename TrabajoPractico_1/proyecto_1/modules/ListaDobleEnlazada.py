@@ -7,6 +7,10 @@ class Nodo:
 @property
 def dato(self):
     return self._dato
+@property
+@dato.setter
+def dato(self, valor):
+    self._dato = valor
 
 @property
 def siguiente(self):
@@ -64,6 +68,12 @@ class ListaDobleEnlazada:
         return self.cabeza is None
 
     def agregar_al_inicio(self, item):
+         """
+         Agrega un elemento al inicio de la lista.
+         Precondición: item puede ser cualquier objeto.
+         Postcondición: Se crea un nuevo nodo que pasa a ser la cabeza de la lista. 
+         El tamaño de la lista aumenta en una unidad.
+         """
         nuevo = Nodo(item)
         if self.esta_vacia():
             self.cabeza = self.cola = nuevo
@@ -74,7 +84,12 @@ class ListaDobleEnlazada:
         self._tamanio += 1
 
     def agregar_al_final(self,item):
-        """si la lista está vacía, el item que se agrega es cabeza y cola"""
+        """
+        Agrega un elemento al final de la lista.
+        Precondición: item puede ser cualquier objeto.
+        Postcondición:  Se agrega un nuevo nodo al final de la lista.
+        El tamaño de la lista aumenta en una unidad.
+        si la lista está vacía, el item que se agrega es cabeza y cola"""
         temp = Nodo(item)
         if self.esta_vacia() :
             self.cabeza = self.cola = temp
@@ -85,8 +100,20 @@ class ListaDobleEnlazada:
         self._tamanio += 1
 
     def insertar(self, item, posicion = None):
+        """
+        Inserta un elemento en una posición determinada.
+        Precondición:
+        posicion debe ser un entero entre 0 y len(lista),
+        o None para insertar al final.
+        Postcondición:
+        El elemento queda almacenado en la posición indicada.
+        El tamaño de la lista aumenta en una unidad.
+        Excepciones:
+        IndexError si la posición es inválida.
+        
+        """
         if posicion is None or posicion == self._tamanio:
-            self.agregar_al_inicio(item)
+            self.agregar_al_final(item)
         elif posicion == 0:
             self.agregar_al_inicio(item)
         elif posicion < 0 or posicion> self._tamanio:
@@ -104,6 +131,18 @@ class ListaDobleEnlazada:
             self._tamanio += 1
     
     def extraer(self, posicion = None):
+        """
+        Elimina y devuelve un elemento de la lista.
+        Precondición:
+        La lista no debe estar vacía.
+        posicion debe ser una posición válida o None.
+        Postcondición:
+        El nodo correspondiente es eliminado de la lista.
+        El tamaño disminuye en una unidad.
+        Se devuelve el dato almacenado.
+        Excepciones:
+        IndexError si la lista está vacía o la posición es inválida.
+        """
         if self.esta_vacia():
             raise IndexError("La lista está vacía.")
         
@@ -139,6 +178,12 @@ class ListaDobleEnlazada:
         return nodo_extraido.dato
     
     def copiar(self):
+        """
+        Genera una copia independiente de la lista.
+        Precondición: Ninguna.
+        Postcondición: Retorna una nueva ListaDobleEnlazada que contiene
+        los mismos elementos en el mismo orden.
+        """
         copia = ListaDobleEnlazada()
         actual = self.cabeza
         while actual:
@@ -147,6 +192,13 @@ class ListaDobleEnlazada:
         return copia
     
     def invertir(self):
+        """
+        Invierte el orden de los elementos de la lista.
+        Precondición: Ninguna.
+        Postcondición:
+        La cabeza pasa a ser la cola y viceversa.
+        Los enlaces entre nodos quedan invertidos.
+        """
         actual = self.cabeza
         while actual:
             actual.anterior, actual.siguiente = actual.siguiente,actual.anterior
@@ -154,6 +206,15 @@ class ListaDobleEnlazada:
         self.cabeza, self.cola = self.cola, self.cabeza
 
     def concatenar(self,otralista):
+        """
+        Concatena otra lista al final de la lista actual.
+        Precondición:
+        otralista debe ser una instancia de ListaDobleEnlazada.
+        Postcondición:
+        Los elementos de otralista quedan agregados
+        al final de la lista actual.
+        """
+
         actual= otralista.cabeza
         while actual is not None:
             self.agregar_al_final(actual.dato)
