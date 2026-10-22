@@ -1,5 +1,10 @@
-class ColaCircular: #se recomienda hacer con una cola doble enlazada, pero si pasa el test se puede dejar asi
-    def __init__(self, capacidad):
+class ColaCircular: 
+    def __init__(self, capacidad): 
+        """se recomienda hacer con una cola doble enlazada, pero si pasa el test se puede dejar asi. 
+En este caso se hace con una lista y se controla el frente y final de la cola, 
+y el tamaño de la misma."""
+        if capacidad <= 0:
+            raise ValueError("La capacidad debe ser un número entero positivo")
         self.capacidad = capacidad #define tamanio de la cola
         self.cola = [None] * capacidad
         self.frente = 0
