@@ -1,4 +1,4 @@
-from modules.quick_sort import quick_sort
+from ayedfiuner.algoritmos.quick_sort import quick_sort
 datos = [8, 3, 5, 1, 9]
 print("QuickSort")
 print("Original:")

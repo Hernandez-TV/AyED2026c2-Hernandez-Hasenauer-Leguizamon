@@ -1,15 +1,15 @@
 import random
 import time
-from modules.bubble_sort import bubble_sort
-from modules.quick_sort import quick_sort
-from modules.radix_sort import radix_sort
+from ayedfiuner.algoritmos.bubble_sort import bubble_sort
+from ayedfiuner.algoritmos.quick_sort import quick_sort
+from ayedfiuner.algoritmos.radix_sort import radix_sort
 def medir_algoritmos():
     tamanios = []
     tiempos_burbuja = []
     tiempos_quick = []
     tiempos_radix = []
     tiempos_sorted = []
-    for n in range(1, 1001, 20):
+    for n in range(500, 5001, 500):
         lista = [
             random.randint(10000, 99999)
             for _ in range(n)

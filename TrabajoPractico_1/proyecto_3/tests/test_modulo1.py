@@ -1,4 +1,4 @@
-from modules.bubble_sort import bubble_sort
+from ayedfiuner.algoritmos.bubble_sort import bubble_sort
 datos = [8, 3, 5, 1, 9]
 print("Lista original:")
 print(datos)
