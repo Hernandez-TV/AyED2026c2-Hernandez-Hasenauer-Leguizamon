@@ -68,13 +68,14 @@ class ListaDobleEnlazada:
         return self.cabeza is None
 
     def agregar_al_inicio(self, item):
-         """
-         Agrega un elemento al inicio de la lista.
-         Precondición: item puede ser cualquier objeto.
-         Postcondición: Se crea un nuevo nodo que pasa a ser la cabeza de la lista. 
-         El tamaño de la lista aumenta en una unidad.
-         """
+        """
+        Agrega un elemento al inicio de la lista.
+        Precondición: item puede ser cualquier objeto.
+        Postcondición: Se crea un nuevo nodo que pasa a ser la cabeza de la lista. 
+        El tamaño de la lista aumenta en una unidad.
+        """
         nuevo = Nodo(item)
+
         if self.esta_vacia():
             self.cabeza = self.cola = nuevo
         else:

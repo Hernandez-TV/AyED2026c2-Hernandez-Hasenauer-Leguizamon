@@ -1,9 +1,15 @@
+import sys
+import os
+
+# Sube dos niveles (de proyecto_1 a TrabajoPractico_1, y de ahí a la raíz del repositorio)
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
+
 import matplotlib.pyplot as plt 
 from random import randint
 import time
 
-from ListaDobleEnlazada import ListaDobleEnlazada
 
+from biblioteca_ayed_fiuner.ayedfiuner.estructuras.ListaDobleEnlazada import ListaDobleEnlazada
 
 tamanos= [x for x in range(1,1001,100) ]
 
