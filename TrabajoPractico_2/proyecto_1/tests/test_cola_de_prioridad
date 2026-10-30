@@ -1,0 +1,11 @@
+from modules.ColaDePrioridad import ColaPrioridad
+
+cola = ColaPrioridad()
+
+cola.encolar(5)
+cola.encolar(1)
+cola.encolar(8)
+cola.encolar(3)
+
+while not cola.esta_vacia():
+    print(cola.desencolar())
