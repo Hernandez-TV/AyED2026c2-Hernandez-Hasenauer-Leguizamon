@@ -1,5 +1,5 @@
 from datetime import datetime
-from modules.arbol_avl import ArbolAVL
+from ayedfiuner.estructuras.arbol_avl import ArbolAVL
 
 
 class Temperaturas_DB:
