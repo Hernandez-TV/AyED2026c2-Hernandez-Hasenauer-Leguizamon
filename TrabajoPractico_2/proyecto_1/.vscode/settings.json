@@ -1,5 +1,8 @@
 {
-    "python.analysis.extraPaths": ["${workspaceFolder}"],
+    "python.analysis.extraPaths": [
+        "${workspaceFolder}",
+        "${workspaceFolder}\\..\\biblioteca_ayed_fiuner"
+    ],
     "terminal.integrated.env.windows": {
         "PYTHONPATH": "${workspaceFolder};${env:PYTHONPATH}",
         "PATH": "${workspaceFolder};${env:PATH}"

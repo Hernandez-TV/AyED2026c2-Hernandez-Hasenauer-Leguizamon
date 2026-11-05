@@ -1,4 +1,4 @@
-from modules.ColaDePrioridad import ColaPrioridad
+from ayedfiuner.estructuras.ColaDePrioridad import ColaPrioridad
 class SalaEmergencias:
     """Administra el ingreso y la atención de pacientes."""
 
@@ -10,7 +10,7 @@ class SalaEmergencias:
         self._cola = ColaPrioridad()
         self._orden_llegada = 0
 
-    def ingresar_paciente(self, paciente, riesgo):
+    def ingresar_paciente(self, paciente, riesgo=None):
         """
         PRE: paciente debe ser una instancia de Paciente.
         POST: agrega el paciente a la cola de prioridad
