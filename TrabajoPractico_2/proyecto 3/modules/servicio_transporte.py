@@ -1,36 +1,62 @@
-from modules.grafo import Grafo
-import heapq
+from ayedfiuner.estructuras.grafo import Grafo
+from ayedfiuner.estructuras.ColaDePrioridad import ColaPrioridad
+
+
 class ServicioTransporte:
     """
-    Gestiona las consultas del problema.
+    Gestiona las consultas del problema de transporte.
     """
 
     def __init__(self):
-
+        """
+        POST: crea un servicio de transporte vacío.
+        """
         self._grafo = Grafo()
-    def maximo_cuello_botella(
+
+    def agregar_ruta(
+        self,
+        origen,
+        destino,
+        capacidad,
+        precio
+    ):
+        """
+        POST: agrega una ruta al grafo.
+        """
+        self._grafo.agregar_arista(
+            origen,
+            destino,
+            capacidad,
+            precio
+        )
+
+    def obtener_peso_maximo(
         self,
         origen,
         destino
     ):
         """
-        POST:
-            devuelve la máxima capacidad
-            transportable.
+        POST: devuelve el máximo cuello de botella
+        entre origen y destino.
         """
 
-        heap = [
-            (-float("inf"), origen)
-        ]
+        cola = ColaPrioridad()
+
+        cola.encolar(
+            (
+                -float("inf"),
+                origen
+            )
+        )
 
         mejor = {
             origen: float("inf")
         }
 
-        while heap:
+        while not cola.esta_vacia():
 
             capacidad_actual, ciudad = (
-                heapq.heappop(heap)
+                cola.desencolar()
             )
 
             capacidad_actual = (
@@ -53,14 +79,12 @@ class ServicioTransporte:
 
                 if (
                     vecino not in mejor
-                    or nuevo >
-                    mejor[vecino]
+                    or nuevo > mejor[vecino]
                 ):
 
                     mejor[vecino] = nuevo
 
-                    heapq.heappush(
-                        heap,
+                    cola.encolar(
                         (
                             -nuevo,
                             vecino
@@ -68,27 +92,35 @@ class ServicioTransporte:
                     )
 
         return 0
-    def precio_minimo(
+
+    def obtener_precio_minimo(
         self,
         origen,
         destino,
         peso
     ):
         """
-        POST:
-            devuelve el precio mínimo
-            transportable.
+        POST: devuelve el costo mínimo para
+        transportar un peso determinado.
         """
-        heap = [(0, origen)]
 
-        costo = {
+        cola = ColaPrioridad()
+
+        cola.encolar(
+            (
+                0,
+                origen
+            )
+        )
+
+        costos = {
             origen: 0
         }
 
-        while heap:
+        while not cola.esta_vacia():
 
             costo_actual, ciudad = (
-                heapq.heappop(heap)
+                cola.desencolar()
             )
 
             if ciudad == destino:
@@ -109,17 +141,16 @@ class ServicioTransporte:
                 )
 
                 if (
-                    vecino not in costo
-                    or nuevo_costo
-                    < costo[vecino]
+                    vecino not in costos
+                    or nuevo_costo <
+                    costos[vecino]
                 ):
 
-                    costo[vecino] = (
+                    costos[vecino] = (
                         nuevo_costo
                     )
 
-                    heapq.heappush(
-                        heap,
+                    cola.encolar(
                         (
                             nuevo_costo,
                             vecino
@@ -127,3 +158,58 @@ class ServicioTransporte:
                     )
 
         return None
+
+    def analizar_transporte(
+        self,
+        origen,
+        destino,
+        peso
+    ):
+        """
+        POST: coordina el cálculo del máximo
+        cuello de botella y del costo mínimo
+        para transportar el peso indicado.
+        """
+
+        peso_maximo = self.obtener_peso_maximo(
+            origen,
+            destino
+        )
+
+        precio_minimo = self.obtener_precio_minimo(
+            origen,
+            destino,
+            peso
+        )
+
+        return {
+            "peso_maximo": peso_maximo,
+            "precio_minimo": precio_minimo,
+        }
+    def analizar_transporte(
+        self,
+        origen,
+        destino,
+        peso
+    ):
+        """
+        POST: coordina el cálculo del máximo
+        cuello de botella y del costo mínimo
+        para transportar el peso indicado.
+        """
+
+        peso_maximo = self.obtener_peso_maximo(
+            origen,
+            destino
+        )
+
+        precio_minimo = self.obtener_precio_minimo(
+            origen,
+            destino,
+            peso
+        )
+
+        return {
+            "peso_maximo": peso_maximo,
+            "precio_minimo": precio_minimo
+        }

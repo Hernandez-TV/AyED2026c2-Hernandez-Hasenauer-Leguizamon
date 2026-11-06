@@ -1,4 +1,4 @@
-from modules.grafo import Grafo
+from ayedfiuner.estructuras.grafo import Grafo
 
 g = Grafo()
 
